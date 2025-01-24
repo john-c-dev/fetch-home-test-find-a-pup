@@ -177,7 +177,6 @@ export default function SearchPage() {
         const bestDogMatch = favorites.find(dog => dog.id === match.match)
         if (bestDogMatch) {
           setMatchedDog(bestDogMatch)
-          console.log(bestDogMatch)
           return bestDogMatch
         } else {
           console.error('No matching dog found')
@@ -211,9 +210,8 @@ export default function SearchPage() {
   // Handle change in breed
   function handleBreedChange(breed) {
     if (breed.length === 0 || breed[0] === '') {
-      console.log('No breed selected')
       setSelectedBreed([])
-      setSearchStr(defaultSearchStr)
+      return
     }
     setSelectedBreed(breed)
   }
