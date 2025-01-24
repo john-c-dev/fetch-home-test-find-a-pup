@@ -5,6 +5,7 @@ import Match from './Match'
 
 export default function SearchPage() {
   const baseURL = 'https://frontend-take-home-service.fetch.com'
+  const defaultSearchStr = `${baseURL}/dogs/search?sort=breed:asc`
 
   // States
   const [breedsList, setBreedsList] = useState([])
@@ -207,13 +208,23 @@ export default function SearchPage() {
     setSearchIndex(prevIndex => Math.max(0, prevIndex + direction * fetchAmount))
   }
 
+  // Handle change in breed
+  function handleBreedChange(breed) {
+    if (breed.length === 0 || breed[0] === '') {
+      console.log('No breed selected')
+      setSelectedBreed([])
+      setSearchStr(defaultSearchStr)
+    }
+    setSelectedBreed(breed)
+  }
+
   return (
     <section className="search-section">
       { matchedDog && <Match matchedDog={matchedDog} handleClose={handleClose} /> }
       <h1>Find a pup</h1>
       <div className='breed-dropdown'>
         <label htmlFor="breed-select">Breed:</label>
-        <select id="breed-select" onChange={(e) => setSelectedBreed([e.target.value])}>
+        <select id="breed-select" onChange={(e) => handleBreedChange([e.target.value])}>
           <option value="">-- Pick a breed --</option>
           {breedsList.map((breed) => (
             <option key={breed} value={breed}>
