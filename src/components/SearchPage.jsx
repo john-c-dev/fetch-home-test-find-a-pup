@@ -218,7 +218,6 @@ export default function SearchPage() {
 
   return (
     <section className="search-section">
-      { matchedDog && <Match matchedDog={matchedDog} handleClose={handleClose} /> }
       <h1>Find a pup</h1>
       <div className='breed-dropdown'>
         <label htmlFor="breed-select">Breed:</label>
@@ -267,8 +266,12 @@ export default function SearchPage() {
             Descending
           </button>
         </div>
-      {favorites.length > 0 &&  <button className='match-button' onClick={selectFavorite}>Select Match</button>}
       </div>
+      {favorites.length > 0 &&  
+        <div className="match-button-container">
+          <button className='match-button' onClick={selectFavorite}>Select Match</button>
+        </div>
+      }
       <h2>Results</h2>
       {dogResults}
       <div className='page-controls'>
@@ -278,6 +281,7 @@ export default function SearchPage() {
         </p>
         {resultTotal > searchIndex + fetchAmount && <button onClick={() => handlePageChange(1)}>Next</button>}
       </div>
+      { matchedDog && <Match matchedDog={matchedDog} handleClose={handleClose} /> }
     </section>
   )
 }
