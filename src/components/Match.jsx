@@ -7,7 +7,7 @@ export default function Match({ matchedDog, handleClose }) {
   const { width, height } = useWindowSize()
 
   return (
-    <section className="match-section">
+    <div className="match-section">
       <Confetti
         width={width}
         height={height}
@@ -21,6 +21,6 @@ export default function Match({ matchedDog, handleClose }) {
         <img className="match-image" src={matchedDog.img} alt={matchedDog.name} /> 
       </div>
 
-    </section>
+    </div>
   )
 }
